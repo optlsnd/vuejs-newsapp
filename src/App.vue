@@ -1,5 +1,6 @@
 <template>
-  <div id="app">
+  <div class="app">
+    <notifications></notifications>
     <div class="header">
       <div>
         <source-filter></source-filter>
@@ -11,27 +12,16 @@
 
 <script>
 
-import NewsFeed from './components/NewsFeed'
-import Filter from './components/Filter'
+import NewsFeed from './components/NewsFeed.vue'
+import Filter from './components/Filter.vue'
+import Notifications from './components/Notifications.vue' // TODO: make notifications
 
 export default {
   name: 'app',
-  beforeCreate () { // get all news sources
-    this.$http.get('https://newsapi.org/v1/sources?language=en')
-      .then(
-        response => {
-          this.$store.commit({ // update store
-            type: 'updateSources',
-            sources: response.body.sources
-          })
-        },
-        error => {
-          console.log(error)
-        })
-  },
   components: {
     'source-filter': Filter,
-    'news-feed': NewsFeed
+    'news-feed': NewsFeed,
+    'notifications': Notifications
   }
 }
 </script>
@@ -46,8 +36,8 @@ html, body {
   padding: 0;
 }
 
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+body {
+  font-family: Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

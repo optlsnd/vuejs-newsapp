@@ -15,13 +15,31 @@
 
 <script>
 
+import { EventBus } from './event_bus/event-bus.js'
+
 const API_KEY = 'b7923a8ad9474270873932efd37d90b0'
+const API_SOURCES_ENDPOINT = 'https://newsapi.org/v1/articles'
 
 export default {
   data () {
     return {
       dataIsFetching: false
     }
+  },
+  beforeCreate () { // get all news sources
+    this.$http.get('https://newsapi.org/v1/sources?language=en')
+      .then(
+        response => {
+          this.$store.commit({ // update store
+            type: 'updateSources',
+            sources: response.body.sources
+          })
+          EventBus.$emit('notify', 'News sources refreshed!') // send messge to global event bus
+        },
+        error => {
+          console.log(error)
+          EventBus.$emit('notify', 'Could not get news sources')
+        })
   },
   computed: {
     newsSources () {
@@ -31,7 +49,7 @@ export default {
   methods: {
     fetchNews (e) {
       this.dataIsFetching = true
-      this.$http.get('https://newsapi.org/v1/articles', {
+      this.$http.get(API_SOURCES_ENDPOINT, {
         params: {
           apiKey: API_KEY,
           source: e.target.value
@@ -42,6 +60,7 @@ export default {
             type: 'updateFeed',
             news: response.body.articles
           })
+          EventBus.$emit('notify', `News from ${e.target.value}`)
           this.dataIsFetching = false
           window.scrollTo(0, 0)
         },
