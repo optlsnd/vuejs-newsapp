@@ -6,7 +6,7 @@
 
 <script>
   
-  import { EventBus } from './event_bus/event-bus.js'
+  import { EventBus } from '@/event-bus.js'
   
   export default {
     data () {

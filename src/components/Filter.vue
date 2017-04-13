@@ -15,7 +15,7 @@
 
 <script>
 
-import { EventBus } from './event_bus/event-bus.js'
+import { EventBus } from '@/event-bus.js'
 
 const API_KEY = 'b7923a8ad9474270873932efd37d90b0'
 const API_SOURCES_ENDPOINT = 'https://newsapi.org/v1/articles'
