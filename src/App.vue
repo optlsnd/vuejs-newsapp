@@ -2,10 +2,10 @@
   <div id="app">
     <div class="header">
       <div>
-        <source-filter @newsFetched="showNews"></source-filter>
+        <source-filter></source-filter>
       </div>
     </div>
-    <news-feed :news="currentFeed"></news-feed>
+    <news-feed></news-feed>
   </div>
 </template>
 
@@ -16,23 +16,22 @@ import Filter from './components/Filter'
 
 export default {
   name: 'app',
-  data () {
-    return {
-      currentFeed: [], // текущая лента новостей
-      readLaterFeed: [] // сюда складываем посты, которые можно будет прочитать позже
-    }
+  beforeCreate () { // get all news sources
+    this.$http.get('https://newsapi.org/v1/sources?language=en')
+      .then(
+        response => {
+          this.$store.commit({ // update store
+            type: 'updateSources',
+            sources: response.body.sources
+          })
+        },
+        error => {
+          console.log(error)
+        })
   },
   components: {
     'source-filter': Filter,
     'news-feed': NewsFeed
-  },
-  methods: { // вернуться сюда
-    showNews (news) {
-      this.currentFeed = []
-      news.forEach(
-        post => this.currentFeed.push(post)
-      )
-    }
   }
 }
 </script>

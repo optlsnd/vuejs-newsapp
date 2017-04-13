@@ -5,6 +5,15 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
   state: {
-    test: 'lol'
+    newsSources: [],
+    currentNewsFeed: []
+  },
+  mutations: {
+    updateSources (state, payload) {
+      state.newsSources = [...payload.sources]
+    },
+    updateFeed (state, payload) {
+      state.currentNewsFeed = [...payload.news]
+    }
   }
 })

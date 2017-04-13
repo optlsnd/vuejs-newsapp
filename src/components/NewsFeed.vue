@@ -11,9 +11,13 @@
 import NewsPost from './NewsPost'
 
 export default {
-  props: ['news'],
   components: {
     'news-post': NewsPost
+  },
+  computed: {
+    news () {
+      return this.$store.state.currentNewsFeed
+    }
   }
 }
 

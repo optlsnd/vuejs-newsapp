@@ -4,9 +4,9 @@
   <span>News from</span>
   <select @change="fetchNews">
     <option 
-      v-for="resource in newsResources"
-      :value="resource.id">
-      {{ resource.name }}
+      v-for="source in newsSources"
+      :value="source.id">
+      {{ source.name }}
     </option>  
   </select>
 </div>
@@ -20,30 +20,13 @@ const API_KEY = 'b7923a8ad9474270873932efd37d90b0'
 export default {
   data () {
     return {
-      newsResources: [],
       dataIsFetching: false
     }
   },
   computed: {
-    test () {
-      return this.$store.state.test
+    newsSources () {
+      return this.$store.state.newsSources
     }
-  },
-  beforeCreate () { // get all news sources
-    this.$http.get('https://newsapi.org/v1/sources?language=en')
-      .then(
-        response => {
-          response.body.sources.forEach(
-            resource => {
-              this.newsResources.push({
-                name: resource.name,
-                id: resource.id
-              })
-            })
-        },
-        error => {
-          console.log(error)
-        })
   },
   methods: {
     fetchNews (e) {
@@ -55,11 +38,14 @@ export default {
         }
       }).then(
         response => {
-          this.$emit('newsFetched', response.body.articles)
+          this.$store.commit({
+            type: 'updateFeed',
+            news: response.body.articles
+          })
           this.dataIsFetching = false
           window.scrollTo(0, 0)
         },
-        error => {
+        error => { // TODO: add warning to interface
           console.log(error)
           this.dataIsFetching = false
         })
