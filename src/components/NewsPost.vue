@@ -1,12 +1,14 @@
 <template>
   <div class="post">
-    <h2> #{{ index + 1 }} {{ post.title }} </h2>
-    <h4> {{ post.author }}</h4>
-    <p> {{ post.description }} </p>
-    <img :src="post.urlToImage" :alt="post.title">
-    <a class="btn" :href="post.url" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i> Read more</a>
-    <a class="btn" :href="post.url" target="_blank"><i class="fa fa-clock-o" aria-hidden="true"></i></a>
-    <a class="btn" :href="post.url" target="_blank"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+    <div class="post-image">
+      <img :src="post.urlToImage" :alt="post.title">      
+    </div>
+    <div class="post-text-content">
+      <h4><a :href="post.url" target="_blank">{{ post.title }}</a></h4>
+      <h5> {{ post.author }}</h5>
+      <p> {{ post.description }} </p>
+      <!--<a class="btn" :href="post.url" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i> Read more</a>-->
+    </div>
   </div>
 </template>
 
@@ -18,20 +20,17 @@
 
 <style scoped>
 
-h2, h4, p {
-  margin: 0 auto .5em;
+h4, h5, p {
+  margin-top: 0;
 }
 
 .btn {
   display: inline-block;
-  /*width: 150px;*/
-  margin: .5rem auto 0;
-  /*font-size: 1.25em;*/
-  /*font-weight: 600;*/
+  width: 130px;
   text-decoration: none;
   text-align: center;
   color: #ffffff;
-  padding: .75em;
+  padding: .5em;
   background-color: #0000ff;
   transition: all .15s ease-in-out;
 }
@@ -42,20 +41,30 @@ h2, h4, p {
 
 img {
   width: 100%;
-  background-color: pink;
-  margin: .5em auto;
+  /*background-color: pink;*/
 }
 
 .post {
+  display: flex;
   margin: 0 auto 2em;
-  padding: 1rem;
-  width: 700px;
-  border-left: .25em solid #0000ff;  
-  transition: all .25s ease-in-out;
+  padding: 1rem 0;
+  width: 80%;
+  border-bottom: 1px solid #999;
 }
 
-.post:hover {
-  border-color: #ff0000;
+.post-image {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 10%;
+  margin-right: 1rem;
+}
+
+.post-text-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 80%;
 }
   
 </style>
