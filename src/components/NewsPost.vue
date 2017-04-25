@@ -1,13 +1,12 @@
 <template>
   <div class="post">
     <div class="post-image">
-      <img :src="post.urlToImage" :alt="post.title" :href="post.url">      
+      <img :src="post.urlToImage" :alt="post.title">      
     </div>
     <div class="post-text-content">
       <h4><a :href="post.url" target="_blank">{{ post.title }}</a></h4>
       <h5> {{ post.author }}</h5>
       <p> {{ post.description }} </p>
-      <!--<a class="btn" :href="post.url" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i> Read more</a>-->
     </div>
   </div>
 </template>

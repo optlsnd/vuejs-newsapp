@@ -9,7 +9,6 @@
       {{ source.name }}
     </option>  
   </select>
-  <button @click="emitNotification">Emit</button>
 </div>
 
 </template>
