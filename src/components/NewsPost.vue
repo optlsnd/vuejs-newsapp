@@ -1,7 +1,7 @@
 <template>
   <div class="post">
     <div class="post-image">
-      <img :src="post.urlToImage" :alt="post.title">      
+      <img :src="post.urlToImage" :alt="post.title" :href="post.url">      
     </div>
     <div class="post-text-content">
       <h4><a :href="post.url" target="_blank">{{ post.title }}</a></h4>
@@ -21,7 +21,7 @@
 <style scoped>
 
 h4, h5, p {
-  margin-top: 0;
+  margin: 0;
 }
 
 .btn {
@@ -46,25 +46,24 @@ img {
 
 .post {
   display: flex;
-  margin: 0 auto 2em;
+  margin: 0 auto .5em;
   padding: 1rem 0;
-  width: 80%;
-  border-bottom: 1px solid #999;
+  width: 600px;
 }
 
 .post-image {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  width: 10%;
-  margin-right: 1rem;
+  justify-content: flex-start;
+  width: 40%;
+  margin-right: .5rem;
 }
 
 .post-text-content {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  width: 80%;
+  width: 60%;
 }
   
 </style>

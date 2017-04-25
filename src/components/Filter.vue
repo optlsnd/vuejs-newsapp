@@ -9,6 +9,7 @@
       {{ source.name }}
     </option>  
   </select>
+  <button @click="emitNotification">Emit</button>
 </div>
 
 </template>
@@ -23,7 +24,8 @@ const API_SOURCES_ENDPOINT = 'https://newsapi.org/v1/articles'
 export default {
   data () {
     return {
-      dataIsFetching: false
+      dataIsFetching: false,
+      counter: 0
     }
   },
   beforeCreate () { // get all news sources
@@ -48,6 +50,10 @@ export default {
   },
   methods: {
     fetchNews (e) {
+      this.$store.commit({
+        type: 'updateFeed',
+        news: {}
+      })
       this.dataIsFetching = true
       this.$http.get(API_SOURCES_ENDPOINT, {
         params: {
@@ -68,6 +74,10 @@ export default {
           console.log(error)
           this.dataIsFetching = false
         })
+    },
+    emitNotification () {
+      this.counter++
+      EventBus.$emit('notify', `test ${this.counter}`)
     }
   }
 }
