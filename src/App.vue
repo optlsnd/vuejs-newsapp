@@ -46,20 +46,20 @@ body {
   position: fixed;
   top: 0;
   width: 100%;
-  background-color: #0000ff;
+  background-color: #6aafd8;
   color: #ffffff;
 }
 
-.header > div {
+/*.header > div {
   text-align: center;
-}
+}*/
 
 .filter {
   display: inline-block;
 }
 
 .newsfeed {
-  margin-top: 6rem;
+  margin-top: 9rem;
 }
 
 </style>

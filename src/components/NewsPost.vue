@@ -45,9 +45,11 @@ img {
 
 .post {
   display: flex;
-  margin: 0 auto .5em;
-  padding: 1rem 0;
+  margin: 0 1rem .5em;
+  padding: 1rem;
   width: 600px;
+  background-color: #effbff;
+  box-shadow: 0 0 5px 0 #86c4ea;
 }
 
 .post-image {

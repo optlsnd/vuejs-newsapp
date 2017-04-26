@@ -1,14 +1,23 @@
 <template>
 
 <div class="filter">
-  <span>News from</span>
-  <select @change="fetchNews">
-    <option 
-      v-for="source in newsSources"
-      :value="source.id">
-      {{ source.name }}
-    </option>  
-  </select>
+  <el-row>
+
+  </el-row>
+
+  <h1>News app</h1>
+  
+  <el-select 
+    v-model="currentSource"
+    @change="fetchNews"
+    placeholder="Select news source">
+    <el-option 
+      v-for="source in newsSources" 
+      :value="source.id" 
+      :label="source.name">
+    </el-option>
+  </el-select>
+
 </div>
 
 </template>
@@ -24,7 +33,8 @@ export default {
   data () {
     return {
       dataIsFetching: false,
-      counter: 0
+      counter: 0,
+      currentSource: ''
     }
   },
   beforeCreate () { // get all news sources
@@ -57,7 +67,7 @@ export default {
       this.$http.get(API_SOURCES_ENDPOINT, {
         params: {
           apiKey: API_KEY,
-          source: e.target.value
+          source: this.currentSource
         }
       }).then(
         response => {
@@ -65,7 +75,7 @@ export default {
             type: 'updateFeed',
             news: response.body.articles
           })
-          EventBus.$emit('notify', `News from ${e.target.value}`)
+          EventBus.$emit('notify', `News from ${this.currentSource}`)
           this.dataIsFetching = false
           window.scrollTo(0, 0)
         },
@@ -73,10 +83,6 @@ export default {
           console.log(error)
           this.dataIsFetching = false
         })
-    },
-    emitNotification () {
-      this.counter++
-      EventBus.$emit('notify', `test ${this.counter}`)
     }
   }
 }
@@ -85,22 +91,17 @@ export default {
 
 <style scoped>
 
+.filter {
+  padding: 1em;
+}
+
+h1 {
+  margin: 0 0 1rem;
+}
+
 span {
   font-size: 1.5em;
   margin-right: 1em;
-}
-
-select {
-  display: inline-block;
-  font-size: 1.5em;
-  outline: 0;
-  margin: 1rem auto;
-  padding: .25em;
-}
-
-.loading {
-  margin: 1rem auto;
-  text-align: center;
 }
 
 </style>

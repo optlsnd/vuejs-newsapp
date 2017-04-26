@@ -1,9 +1,9 @@
 <template>
-  <div class="notification-container">
+  <!--<div class="notification-container">
     <div class="notification" v-for="message in messages">
       {{ message }}
     </div>
-  </div>
+  </div>-->
 </template>
 
 <script>
@@ -11,19 +11,13 @@
   import { EventBus } from '@/event-bus.js'
   
   export default {
-    data () {
-      return {
-        messages: []
-      }
-    },
     created () {
       EventBus.$on('notify', (message) => {
-        this.messages.push(message)
-        // setTimeout(() => {
-        //   if (this.messages.length) {
-        //     this.messages.shift()
-        //   }
-        // }, 4000)
+        // const h = this.$createElement
+        this.$notify({
+          title: 'Newsapp',
+          message: message
+        })
       })
     }
   }
@@ -31,7 +25,7 @@
 
 <style>
 
-  .notification-container {
+  /*.notification-container {
     position: fixed;
     bottom: 1rem;
     right: 1rem;
@@ -59,6 +53,6 @@
       opacity: 1;
       transform: scale(1);      
     }
-  }
+  }*/
 
 </style>
