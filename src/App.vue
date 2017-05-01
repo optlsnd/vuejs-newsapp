@@ -14,7 +14,7 @@
 
 import NewsFeed from './components/NewsFeed.vue'
 import Filter from './components/Filter.vue'
-import Notifications from './components/Notifications.vue' // TODO: make notifications
+import Notifications from './components/Notifications.vue'
 
 export default {
   name: 'app',
@@ -27,6 +27,9 @@ export default {
 </script>
 
 <style>
+
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
 * {
   box-sizing: border-box;
 }
@@ -37,7 +40,7 @@ html, body {
 }
 
 body {
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

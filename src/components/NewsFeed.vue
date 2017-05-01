@@ -1,7 +1,12 @@
 <template>
 
 <div class="newsfeed">
-  <news-post v-for="post, i in news" :post="post" :index="i" :key="i"></news-post> 
+  <news-post 
+    v-for="post, i in news"
+    :post="post"
+    :index="i"
+    :key="i">
+  </news-post> 
 </div>
 
 </template>

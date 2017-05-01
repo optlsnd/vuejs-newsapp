@@ -2,22 +2,27 @@
 
 <div class="filter">
   <el-row>
-
+    <el-col>
+      <h1>📰 News app</h1>
+    </el-col>
   </el-row>
-
-  <h1>News app</h1>
-  
-  <el-select 
-    v-model="currentSource"
-    @change="fetchNews"
-    placeholder="Select news source">
-    <el-option 
-      v-for="source in newsSources" 
-      :value="source.id" 
-      :label="source.name">
-    </el-option>
-  </el-select>
-
+  <el-row>
+    <el-form :inline="true" class="filter-form">
+      <el-form-item label="Select news source">
+        <el-select 
+          v-model="currentSource"
+          @change="fetchNews"
+          placeholder=" ">
+          <el-option 
+            v-for="source, index in newsSources"
+            :key="index"
+            :value="source.id"
+            :label="source.name">
+          </el-option>
+        </el-select>
+      </el-form-item>
+    </el-form>
+  </el-row>
 </div>
 
 </template>
@@ -25,15 +30,14 @@
 <script>
 
 import { EventBus } from '@/event-bus.js'
+import { API_KEY } from '@/secret.js'
 
-const API_KEY = 'b7923a8ad9474270873932efd37d90b0'
 const API_SOURCES_ENDPOINT = 'https://newsapi.org/v1/articles'
 
 export default {
   data () {
     return {
       dataIsFetching: false,
-      counter: 0,
       currentSource: ''
     }
   },
@@ -43,7 +47,7 @@ export default {
         response => {
           this.$store.commit({ // update store
             type: 'updateSources',
-            sources: response.body.sources
+            data: response.body.sources
           })
           EventBus.$emit('notify', 'News sources refreshed!') // send messge to global event bus
         },
@@ -58,12 +62,14 @@ export default {
     }
   },
   methods: {
-    fetchNews (e) {
+    fetchNews () {
+      this.dataIsFetching = true
+
       this.$store.commit({
         type: 'updateFeed',
-        news: {}
+        data: {}
       })
-      this.dataIsFetching = true
+
       this.$http.get(API_SOURCES_ENDPOINT, {
         params: {
           apiKey: API_KEY,
@@ -73,13 +79,12 @@ export default {
         response => {
           this.$store.commit({
             type: 'updateFeed',
-            news: response.body.articles
+            data: response.body.articles
           })
-          EventBus.$emit('notify', `News from ${this.currentSource}`)
           this.dataIsFetching = false
           window.scrollTo(0, 0)
         },
-        error => { // TODO: add warning to interface
+        error => {
           console.log(error)
           this.dataIsFetching = false
         })
@@ -91,17 +96,21 @@ export default {
 
 <style scoped>
 
+/*@import url('https://fonts.googleapis.com/css?family=Raleway:400,800');*/
+
 .filter {
-  padding: 1em;
+  padding: 1em 1em 0 1em;
+  width: 100%;
 }
 
 h1 {
   margin: 0 0 1rem;
+  /*font-family: 'Raleway', sans-serif;*/
+  text-transform: uppercase;
 }
 
-span {
-  font-size: 1.5em;
-  margin-right: 1em;
+.filter-form {
+  color: #fff;
 }
 
 </style>
