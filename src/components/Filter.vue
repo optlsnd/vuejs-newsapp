@@ -94,19 +94,15 @@ export default {
 
 </script>
 
-<style scoped>
-
-/*@import url('https://fonts.googleapis.com/css?family=Raleway:400,800');*/
+<style lang="scss" scoped>
 
 .filter {
   padding: 1em 1em 0 1em;
   width: 100%;
-}
-
-h1 {
-  margin: 0 0 1rem;
-  /*font-family: 'Raleway', sans-serif;*/
-  text-transform: uppercase;
+  h1 {
+    margin: 0 0 1rem;
+    text-transform: uppercase;
+  }
 }
 
 .filter-form {
