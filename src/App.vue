@@ -1,11 +1,6 @@
 <template>
   <div class="app">
-    <notifications></notifications>
-    <div class="header">
-      <div>
-        <source-filter></source-filter>
-      </div>
-    </div>
+    <source-filter></source-filter>
     <news-feed></news-feed>
   </div>
 </template>
@@ -59,10 +54,6 @@ body {
 
 .filter {
   display: inline-block;
-}
-
-.newsfeed {
-  margin-top: 9rem;
 }
 
 </style>

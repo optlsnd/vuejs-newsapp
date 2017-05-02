@@ -9,10 +9,10 @@ export const store = new Vuex.Store({
     currentNewsFeed: []
   },
   mutations: {
-    updateSources (state, payload) {
+    UPDATE_SOURCES (state, payload) {
       state.newsSources = [...payload.data]
     },
-    updateFeed (state, payload) {
+    UPDATE_FEED (state, payload) {
       state.currentNewsFeed = [...payload.data]
     }
   }

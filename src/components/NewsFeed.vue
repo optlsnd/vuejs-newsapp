@@ -27,3 +27,13 @@ export default {
 }
 
 </script>
+
+<style>
+
+.newsfeed {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+</style>

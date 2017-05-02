@@ -17,10 +17,14 @@
   }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 
 h4, h5, p {
   margin: 0;
+  margin-bottom: .5rem;
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 .btn {
@@ -40,7 +44,6 @@ h4, h5, p {
 
 img {
   width: 100%;
-  /*background-color: pink;*/
 }
 
 .post {
@@ -48,8 +51,11 @@ img {
   margin: 0 1rem .5em;
   padding: 1rem;
   width: 600px;
-  background-color: #effbff;
-  box-shadow: 0 0 5px 0 #86c4ea;
+  box-shadow: 0px 0px 3px 0 #aaa;
+  transition: all .05s ease-in-out;
+  &:hover {
+    box-shadow: 0px 0px 3px 0 #555;    
+  }
 }
 
 .post-image {
@@ -57,7 +63,10 @@ img {
   flex-direction: column;
   justify-content: flex-start;
   width: 40%;
-  margin-right: .5rem;
+  margin-right: 1rem;
+  // background-color: #000;
+  animation: appear 1s ease-in-out;
+  animation-iteration-count: 1;
 }
 
 .post-text-content {
@@ -65,6 +74,18 @@ img {
   flex-direction: column;
   justify-content: flex-start;
   width: 60%;
+}
+
+@keyframes appear {
+  0% {
+    background-color: #000;
+  }
+  99% {
+    background-color: #fff;    
+  }
+  100% {
+    background-color: transparent;
+  }
 }
   
 </style>
