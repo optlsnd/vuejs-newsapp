@@ -8,11 +8,31 @@ export const store = new Vuex.Store({
     newsSources: [],
     currentNewsFeed: []
   },
+  actions: {
+    fetchNewsSources ({commit}) {
+      Vue.http.get('https://newsapi.org/v1/sources?language=en')
+        .then(
+          response => {
+            commit({
+              type: 'updateSources',
+              data: response.body.sources
+            })
+          },
+          error => {
+            console.log(error)
+          })
+    }
+  },
+  getters: {
+    getSourcesMainData: state => {
+      return state.newsSources.map(source => ({value: source.id, label: source.name}))
+    }
+  },
   mutations: {
-    UPDATE_SOURCES (state, payload) {
+    updateSources (state, payload) {
       state.newsSources = [...payload.data]
     },
-    UPDATE_FEED (state, payload) {
+    updateFeed (state, payload) {
       state.currentNewsFeed = [...payload.data]
     }
   }
