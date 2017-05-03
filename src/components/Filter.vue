@@ -1,28 +1,13 @@
 <template>
 
 <div class="filter">
-  <el-row>
-    <el-col :span="24">
-      <h1>📰 News app</h1>
-    </el-col>
-  </el-row>
-  <el-row>
-    <el-form :inline="true" class="filter-form">
-      <el-form-item label="Select news source">
-        <el-select 
-          v-model="currentSource"
-          @change="fetchNews"
-          placeholder=" ">
-          <el-option 
-            v-for="source, index in newsSources"
-            :key="index"
-            :value="source.id"
-            :label="source.name">
-          </el-option>
-        </el-select>
-      </el-form-item>
-    </el-form>
-  </el-row>
+  <h1>📰 News app</h1>
+  <select @change="fetchNews" v-model="currentSource">
+    <option 
+      v-for="source in newsSources"
+      :value="source.value"
+      >{{source.label}}</option>
+  </select>
 </div>
 
 </template>
@@ -59,10 +44,11 @@ export default {
   computed: {
     newsSources () {
       return this.$store.state.newsSources
+        .map(source => ({value: source.id, label: source.name}))
     }
   },
   methods: {
-    fetchNews () {
+    fetchNews (e) {
       this.dataIsFetching = true
 
       this.$store.commit({
@@ -106,12 +92,14 @@ export default {
     text-transform: uppercase;
     text-align: center;
   }
-}
-
-.filter-form {
-  display: flex;
-  justify-content: center;
-  color: #fff;
+  select {
+    display: block;
+    width: 400px;
+    margin: 1rem auto;
+    padding: .5em;
+    font-size: 1rem;
+    outline: none;
+  }
 }
 
 </style>

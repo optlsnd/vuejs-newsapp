@@ -38,6 +38,8 @@ body {
   font-family: 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 16px;
+  color: #333;
 }
 
 .header {
@@ -46,14 +48,6 @@ body {
   width: 100%;
   background-color: #6aafd8;
   color: #ffffff;
-}
-
-/*.header > div {
-  text-align: center;
-}*/
-
-.filter {
-  display: inline-block;
 }
 
 </style>
